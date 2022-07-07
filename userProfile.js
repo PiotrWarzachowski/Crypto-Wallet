@@ -37,8 +37,7 @@ const readDatabase = () => {
     let content = JSON.parse(db.decrypt(cryptedContent));
     console.log(content)
 }
-createUserProfile()
-readDatabase()
+
 module.exports = {
     createUserProfile,
     updateUserProfile,
