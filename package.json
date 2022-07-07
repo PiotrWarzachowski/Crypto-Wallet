@@ -1,0 +1,24 @@
+{
+  "name": "cryptowallet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "base58": "^2.0.1",
+    "bip32": "^3.0.1",
+    "bitcoinjs-lib": "^6.0.1",
+    "bs58": "^5.0.0",
+    "ecpair": "^2.0.1",
+    "elliptic": "^6.5.4",
+    "fs": "^0.0.1-security",
+    "js-sha256": "^0.9.0",
+    "ripemd160": "^2.0.2",
+    "secure-random": "^1.1.2",
+    "tiny-secp256k1": "^2.2.1"
+  }
+}
