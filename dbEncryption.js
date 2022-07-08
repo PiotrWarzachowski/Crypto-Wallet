@@ -1,13 +1,26 @@
 const crypto = require('crypto');
-
+const fs = require('fs');
 const algorithm = 'aes-256-ctr';
-const secretKey = 'J83KYz3fKme2smZXOIfV24lrNkn1BJ9Q';
+
+const getSecretKey = () => {
+    if (!fs.existsSync(`${process.env.APPDATA || (process.platform == 'darwin' ? process.env.HOME + '/Library/Preferences' : process.env.HOME + "/.local/share")}/cryptowallet`)){
+        const secretKey = crypto.randomBytes(16).toString('hex');
+        fs.writeFileSync(`${process.env.APPDATA || (process.platform == 'darwin' ? process.env.HOME + '/Library/Preferences' : process.env.HOME + "/.local/share")}/cryptowallet`, secretKey, function (err) {
+            if (err) throw err;
+        });
+        
+        return secretKey
+    }
+        
+    return fs.readFileSync(`${process.env.APPDATA || (process.platform == 'darwin' ? process.env.HOME + '/Library/Preferences' : process.env.HOME + "/.local/share")}/cryptowallet`, 'utf8')
+    
+}
 
 const encrypt = (text) => {
     
     const iv = crypto.randomBytes(16);
 
-    const cipher = crypto.createCipheriv(algorithm, secretKey, iv);
+    const cipher = crypto.createCipheriv(algorithm, getSecretKey(), iv);
 
     const encrypted = Buffer.concat([cipher.update(text), cipher.final()]);
 
@@ -19,7 +32,7 @@ const encrypt = (text) => {
 
 const decrypt = (hash) => {
 
-    const decipher = crypto.createDecipheriv(algorithm, secretKey, Buffer.from(hash.iv, 'hex'));
+    const decipher = crypto.createDecipheriv(algorithm, getSecretKey(), Buffer.from(hash.iv, 'hex'));
 
     const decrpyted = Buffer.concat([decipher.update(Buffer.from(hash.content, 'hex')), decipher.final()]);
 
