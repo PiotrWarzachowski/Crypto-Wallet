@@ -12,7 +12,7 @@ const priceApi = require('coingecko-api')
 const createPrivateKeyWIF = async (privateKey) => {
 
     /*
-        Generates a WIFPrivatekey ad address from privateKey
+        Generates a WIFPrivatekey and address from privateKey
 
         ~ Piotr Warząchowski
     */
@@ -28,7 +28,7 @@ const createPrivateKeyWIF = async (privateKey) => {
 const generateBitcoinWalletPair = async (privateKey) => {
 
     /*
-        Generates a keyPair (WIFPrivatekey ad address) from privateKey
+        Generates a keyPair (WIFPrivatekey and address) from privateKey
 
         ~ Piotr Warząchowski
     */
