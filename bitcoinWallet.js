@@ -86,9 +86,9 @@ const broadcastBitcoinTransaction = async (recieverAddress, amountToSend) => {
 
     transaction.from(inputs);
     transaction.to(recieverAddress, satoshiToSend);
-    transaction.change(addressIn);
+    transaction.change(keyPair[1]);
     transaction.fee(fee * 20);
-    transaction.sign(testnetPrivateKeyWIF);
+    transaction.sign(keyPair[0]);
 
 
     const serializedTransaction = transaction.serialize();
